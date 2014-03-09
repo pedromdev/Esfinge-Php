@@ -1,0 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Audiowide);
+@charset "utf-8";
+/* CSS Document */
+
+.esfinge-branco{
+	color: #FFF;
+	font-family:'Audiowide', sans-serif;
+	font-size:72px;
+	font-weight:bolder;
+	text-shadow: 5px 5px #000;
+}
+
+.esfinge-azul{
+	color: #00008a;
+	font-family:'Audiowide', sans-serif;
+	font-size:72px;
+	font-weight:bolder;
+	text-shadow: 5px 5px #ddd;
+}
