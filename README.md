@@ -1,7 +1,7 @@
 Esfinge-Php
 ===========
 
-Desenvolvedor: Pedro Marcelo
+Desenvolvedor: Pedro Marcelo<br>
 Objetivo: Aprender PHP usando um modelo de rede social já existente.
 
 ===========
