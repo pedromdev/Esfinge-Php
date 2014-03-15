@@ -48,7 +48,7 @@ $recebidos = AmizadeDAO::listar_convites_recebidos($_SESSION['id']);
     	<tr>
         	<td class="first"><?php echo $perfil['nome'] ?></td>
             <td class="last">
-            	<a href="<?php echo $this_url_path ?>?conv=env&ac=acc&id=<?php echo $recebido['id'] ?>" class="botao-primario padding3">Aceitar</a>  <a href="<?php echo $this_url_path ?>?conv=env&ac=exc&id=<?php echo $recebido['id'] ?>" class="botao-secundario padding3">Recusar</a>
+            	<a href="<?php echo $this_url_path ?>?conv=rec&ac=acc&id=<?php echo $recebido['id'] ?>" class="botao-primario padding3">Aceitar</a>  <a href="<?php echo $this_url_path ?>?conv=rec&ac=exc&id=<?php echo $recebido['id'] ?>" class="botao-secundario padding3">Recusar</a>
             </td>
         </tr>
     <?php } ?>
