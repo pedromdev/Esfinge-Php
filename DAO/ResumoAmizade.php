@@ -4,14 +4,16 @@ class ResumoAmizade{
 	private static $connection = false;
 	
 	private static function db_connect(){
-		$connection = mysql_connect('127.0.0.1', 'root', '');
+		$connection = mysql_connect(DBHOST, DBUSER, DBPW);
+		
+		date_default_timezone_set('America/Sao_Paulo');
 		
 		if(!$connection){
 			die('Não foi possível connectar: '.mysql_error());
 			return false;
 		}
 		
-		$db = mysql_select_db('esfinge', $connection);
+		$db = mysql_select_db(DBNAME, $connection);
 		
 		if(!$db){
 			die('Não foi possível conectar ao banco: '.mysql_error());
@@ -103,39 +105,8 @@ class ResumoAmizade{
 		ResumoAmizade::db_disconnect();
 	}
 	
-	function listar_resumos_recentes($id_usuario){
-		/*$this->init();
-		
-		$amigos = $this->amizadedao->listar_amigos($id_usuario);
-		
-		if(!$amigos) return false;
-		
-		$resumos = array();
-		
-		foreach($amigos as $amigo){
-			if($amigo['id_convidador'] == $id_usuario){
-				$lista = $this->resumodao->listar_recentes($amigo['id_convidado']);
-			} else {
-				$lista = $this->resumodao->listar_recentes($amigo['id_convidador']);
-			}
-			
-			foreach($lista as $item){
-				if($item['status_visibilidade'] <= 1){
-					$resumos[] = $item;
-				}
-			}
-		}
-		
-		$resumos = mergeSort($resumos);
-		
-		return array_slice($resumos, 0, 3);*/
-		
-		$sql = sprintf("select res.id, res.titulo, res.data_publicacao, per.nome from resumo as res inner join perfil as per, amizade as ami 
-	where per.id_usuario_perfil = res.id_usuario_resumo and res.status_visibilidade <= 1
-	and res.status_publicacao = 0 and
-	((res.id_usuario_resumo = ami.id_convidado and ami.id_convidador = %d) or
-	(res.id_usuario_resumo = ami.id_convidador and ami.id_convidado = %d)) 
-	and ami.status_amizade = 0 order by res.data_publicacao desc limit 3", $id_usuario, $id_usuario);
+	function listar_resumos_recentes($id_usuario){		
+		$sql = sprintf("call resumos_recentes(%d)", $id_usuario);
 		
 		$results = ResumoAmizade::get_list($sql);
 		

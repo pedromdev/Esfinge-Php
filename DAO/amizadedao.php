@@ -5,21 +5,21 @@ class AmizadeDAO{
 	private static $connection = false;
 	
 	private static function db_connect(){
-		$connection = mysql_connect('localhost', 'root', '');
+		$connection = mysql_connect(DBHOST, DBUSER, DBPW);
+		
+		date_default_timezone_set('America/Sao_Paulo');
 		
 		if(!$connection){
 			die('Não foi possível connectar: '.mysql_error());
 			return false;
 		}
 		
-		$db = mysql_select_db('esfinge', $connection);
+		$db = mysql_select_db(DBNAME, $connection);
 		
 		if(!$db){
 			die('Não foi possível conectar ao banco: '.mysql_error());
 			return false;
 		}
-		
-		AmizadeDAO::$connection = true;
 		
 		return $connection;
 	}

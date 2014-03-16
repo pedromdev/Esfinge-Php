@@ -5,14 +5,16 @@ class ResumoDAO{
 	private static $connection = false;
 	
 	private static function db_connect(){
-		$connection = mysql_connect('127.0.0.1', 'root', '');
+		$connection = mysql_connect(DBHOST, DBUSER, DBPW);
+		
+		date_default_timezone_set('America/Sao_Paulo');
 		
 		if(!$connection){
 			die('Não foi possível connectar: '.mysql_error());
 			return false;
 		}
 		
-		$db = mysql_select_db('esfinge', $connection);
+		$db = mysql_select_db(DBNAME, $connection);
 		
 		if(!$db){
 			die('Não foi possível conectar ao banco: '.mysql_error());
@@ -109,7 +111,6 @@ class ResumoDAO{
 	}
 	
 	static function salvar($valores = array()){
-		date_default_timezone_set('America/Sao_Paulo');
 		if($valores['status_publicacao'] == 0){
 			
 			$sql = sprintf("INSERT INTO resumo(titulo, texto, status_publicacao, status_visibilidade, area, referencia, data_publicacao, id_usuario_resumo) VALUES('%s', '%s', %d, %d, '%s', '%s', '%s', %d)", $valores['titulo'], $valores['texto'], $valores['status_publicacao'], $valores['status_visibilidade'], $valores['area'], $valores['referencia'], date('Y-m-d H:i:s', time()), $valores['id_usuario_resumo']);
